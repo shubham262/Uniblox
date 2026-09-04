@@ -26,7 +26,8 @@ Deliverables: a working service, meaningful tests (including concurrent/repeated
 │       ├── config/         <- mongo connection, app constants
 │       ├── models/         <- mongoose schemas only
 │       ├── controllers/    <- request validation + HTTP response shape
-│       ├── helper/         <- business logic, db operations, utilities
+│       ├── service/        <- business logic and db operations
+│       ├── helper/         <- generic utilities (money, responses, validation)
 │       └── routes/         <- express routers
 └── frontend/
     └── src/
@@ -105,12 +106,14 @@ Keep the `console.log("error==>functionName", error)` format exactly — it make
 Request flow is strictly one direction:
 
 ```
-routes  →  controllers  →  helper  →  models
+routes  →  controllers  →  service  →  models
+                  ↘  helper  ↙
 ```
 
 - **routes/** — path + method + controller binding. No logic.
-- **controllers/** — parse and validate input, call helpers, map result to HTTP status + body. No direct Mongoose queries.
-- **helper/** — all business logic and database operations. This is where invariants are enforced.
+- **controllers/** — parse and validate input, call a service, map the result to an HTTP status + body. No direct Mongoose queries.
+- **service/** — all business logic and database operations. This is where invariants are enforced.
+- **helper/** — generic, reusable utilities only: money maths, response envelopes, id validation. **No domain rules and no model imports.** If it touches a model, it belongs in `service/`.
 - **models/** — Mongoose schemas, indexes, and nothing else.
 
 ---

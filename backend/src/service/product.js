@@ -1,6 +1,6 @@
 import Product from "../models/product.js";
-import { appError } from "./response.js";
-import { toMajor } from "./money.js";
+import { appError } from "../helper/response.js";
+import { toMajor } from "../helper/money.js";
 
 export const buildProductView = (product) => ({
 	productId: product._id,

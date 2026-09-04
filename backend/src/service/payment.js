@@ -1,4 +1,4 @@
-import { appError } from "./response.js";
+import { appError } from "../helper/response.js";
 
 // Stand-in for a real payment gateway. It always succeeds, but it is a real
 // step with a real failure path, so checkout already knows how to unwind when a

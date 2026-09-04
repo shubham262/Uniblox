@@ -1,7 +1,7 @@
 import { sendSuccess, handleControllerError, appError } from "../helper/response.js";
 import { validateId } from "../helper/validate.js";
-import { checkoutCart } from "../helper/checkout.js";
-import { findOrder, buildOrderView } from "../helper/order.js";
+import { checkoutCart } from "../service/checkout.js";
+import { findOrder, buildOrderView } from "../service/order.js";
 
 export const handleCheckout = async (req, res) => {
 	try {

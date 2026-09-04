@@ -1,6 +1,6 @@
 import Coupon from "../models/coupon.js";
 import { COUPON_STATUS } from "../config/constants.js";
-import { appError } from "./response.js";
+import { appError } from "../helper/response.js";
 
 export const normaliseCode = (code) => String(code || "").trim().toUpperCase();
 

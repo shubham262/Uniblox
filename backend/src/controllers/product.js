@@ -1,5 +1,5 @@
 import { sendSuccess, handleControllerError } from "../helper/response.js";
-import { listActiveProducts } from "../helper/product.js";
+import { listActiveProducts } from "../service/product.js";
 
 export const handleListProducts = async (req, res) => {
 	try {

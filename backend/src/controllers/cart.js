@@ -1,6 +1,6 @@
 import { sendSuccess, handleControllerError } from "../helper/response.js";
 import { validateId, validateQuantity } from "../helper/validate.js";
-import { createCart, findCart, buildCartView, addCartItem, updateCartItem, removeCartItem } from "../helper/cart.js";
+import { createCart, findCart, buildCartView, addCartItem, updateCartItem, removeCartItem } from "../service/cart.js";
 
 export const handleCreateCart = async (req, res) => {
 	try {
