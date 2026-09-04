@@ -1,7 +1,9 @@
 import mongoose from "mongoose";
 
-const database = process.env.DATABASE;
-const MONGO_URI = "mongodb://127.0.0.1:27017/" + database;
+// Defaults so the service still starts if .env is missing, rather than silently
+// connecting to a database literally named "undefined".
+const database = process.env.DATABASE || "uniblox";
+const MONGO_URI = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/" + database;
 
 export const handleMongoDBConnection = async () => {
 	try {
