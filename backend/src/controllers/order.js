@@ -12,7 +12,11 @@ export const handleCheckout = async (req, res) => {
 			throw appError(400, "IDEMPOTENCY_KEY_REQUIRED", "An Idempotency-Key header is required to check out");
 		}
 
-		const { order, replayed } = await checkoutCart(cartId, idempotencyKey, req.body.couponCode);
+		// express.json() only populates req.body when the request carries a JSON
+		// content type, so a bodyless request leaves it undefined.
+		const { couponCode } = req.body || {};
+
+		const { order, replayed } = await checkoutCart(cartId, idempotencyKey, couponCode);
 
 		// 200 for a replayed retry, 201 when this request actually created it.
 		return sendSuccess(res, replayed ? 200 : 201, { ...buildOrderView(order), replayed });

@@ -19,7 +19,7 @@ export const seedProducts = [
 // Resets the whole domain, not just products. A reviewer running this wants a
 // known state to evaluate against, and leaving old orders behind would skew the
 // coupon milestone count and the admin report.
-export const runSeed = async () => {
+export const runSeed = async ({ silent = false } = {}) => {
 	try {
 		await Promise.all([
 			Product.deleteMany({}),
@@ -27,9 +27,14 @@ export const runSeed = async () => {
 			Order.deleteMany({}),
 			Coupon.deleteMany({}),
 		]);
-		console.log("cleared products, carts, orders and coupons");
 
 		const products = await Product.insertMany(seedProducts);
+
+		if (silent) {
+			return products;
+		}
+
+		console.log("cleared products, carts, orders and coupons");
 		console.log(`seeded ${products.length} products`);
 
 		products.forEach((product) => {

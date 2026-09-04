@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"main": "index.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
+		"test": "node --import ./env.js --test --test-concurrency=1 tests/*.test.js",
 		"dev": "nodemon --import ./env.js index.js",
 		"start": "node --import ./env.js index.js",
 		"seed": "node --import ./env.js src/service/seed.js"
