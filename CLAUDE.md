@@ -152,7 +152,7 @@ Do this instead — the condition and the write are one atomic operation:
 const updated = await Product.findOneAndUpdate(
 	{ _id: id, inventory: { $gte: qty } },
 	{ $inc: { inventory: -qty } },
-	{ new: true }
+	{ returnDocument: "after" } // mongoose 9 deprecated `new: true`
 );
 if (!updated) {
 	// lost the race, or never had stock

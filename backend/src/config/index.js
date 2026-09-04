@@ -9,5 +9,17 @@ export const handleMongoDBConnection = async () => {
 		console.log("mongodb connection successfull");
 	} catch (error) {
 		console.log("error==>handleMongoDBConnection", error);
+		// A server that boots without a database would accept requests it cannot
+		// honour, so the caller must be able to abort startup.
+		throw error;
+	}
+};
+
+export const handleMongoDBDisconnection = async () => {
+	try {
+		await mongoose.disconnect();
+		console.log("mongodb disconnected");
+	} catch (error) {
+		console.log("error==>handleMongoDBDisconnection", error);
 	}
 };
